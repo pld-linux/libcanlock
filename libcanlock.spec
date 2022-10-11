@@ -1,12 +1,12 @@
 Summary:	A library for creating and verifying cancel locks
 Summary(pl.UTF-8):	Biblioteka do tworzenia i weryfikowania cancel-locków
 Name:		libcanlock
-Version:	3.1.0
+Version:	3.3.0
 Release:	1
 License:	MIT-like, BSD-like
 Group:		Libraries
 Source0:	https://micha.freeshell.org/libcanlock/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	957818da26e7a24dd6e311b3e00738ba
+# Source0-md5:	e1de8ff736867d24c5e1ba2fc02f0ad7
 URL:		https://micha.freeshell.org/libcanlock/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -50,7 +50,8 @@ Statyczna biblioteka canlock.
 %setup -q
 
 %build
-%configure
+%configure \
+	--disable-silent-rules
 
 %{__make}
 
@@ -61,7 +62,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # no external dependencies
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libcanlock.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libcanlock*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,6 +78,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/canlock-mhp
 %attr(755,root,root) %{_libdir}/libcanlock.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libcanlock.so.3
+%attr(755,root,root) %{_libdir}/libcanlock-hp.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcanlock-hp.so.3
 %{_mandir}/man1/canlock.1*
 %{_mandir}/man1/canlock-hfp.1*
 %{_mandir}/man1/canlock-mhp.1*
@@ -84,9 +87,11 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcanlock.so
+%attr(755,root,root) %{_libdir}/libcanlock-hp.so
 %{_includedir}/libcanlock-3
 %{_mandir}/man3/cl_*.3*
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libcanlock.a
+%{_libdir}/libcanlock-hp.a
