@@ -1,13 +1,14 @@
 Summary:	A library for creating and verifying cancel locks
 Summary(pl.UTF-8):	Biblioteka do tworzenia i weryfikowania cancel-locków
 Name:		libcanlock
-Version:	3.3.0
+Version:	3.3.1
 Release:	1
-License:	MIT-like, BSD-like
+License:	ICU
 Group:		Libraries
 Source0:	https://micha.freeshell.org/libcanlock/src/%{name}-%{version}.tar.bz2
-# Source0-md5:	e1de8ff736867d24c5e1ba2fc02f0ad7
+# Source0-md5:	968d653e4b7d0bb41638f15499614f89
 URL:		https://micha.freeshell.org/libcanlock/
+BuildRequires:	pkgconfig >= 1:0.29
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -51,6 +52,7 @@ Statyczna biblioteka canlock.
 
 %build
 %configure \
+	--enable-pc-files \
 	--disable-silent-rules
 
 %{__make}
@@ -89,6 +91,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libcanlock.so
 %attr(755,root,root) %{_libdir}/libcanlock-hp.so
 %{_includedir}/libcanlock-3
+%{_pkgconfigdir}/libcanlock-3.pc
+%{_pkgconfigdir}/libcanlock-hp-3.pc
 %{_mandir}/man3/cl_*.3*
 
 %files static
