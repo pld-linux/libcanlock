@@ -2,13 +2,14 @@ Summary:	A library for creating and verifying cancel locks
 Summary(pl.UTF-8):	Biblioteka do tworzenia i weryfikowania cancel-locków
 Name:		libcanlock
 Version:	3.3.1
-Release:	1
+Release:	2
 License:	ICU
 Group:		Libraries
 Source0:	https://micha.freeshell.org/libcanlock/src/%{name}-%{version}.tar.bz2
 # Source0-md5:	968d653e4b7d0bb41638f15499614f89
 URL:		https://micha.freeshell.org/libcanlock/
 BuildRequires:	pkgconfig >= 1:0.29
+Obsoletes:	canlock < 3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
